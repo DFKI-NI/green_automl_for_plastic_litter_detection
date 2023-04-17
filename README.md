@@ -20,3 +20,6 @@ Code for the paper "Green-AutoML for Plastic Litter Detection" published at ICLR
             python ENAS.py --path_to_data *path_to_data*
 
       This will perform Neural Architecture Search and train the best archietcture from scratch. It provides the final metrics on the test set and the training emissions. 
+
+
+The maintainer of this software is Daphne Theodorakopoulos (daphne.theodorakopoulos@dfki.de).
