@@ -1,0 +1,13 @@
+nni==2.9
+numpy
+pandas
+torch
+codecarbon
+fvcore
+torchvision==0.14.0
+scikit-learn
+pytorch-lightning==1.7.7
+nn_meter
+tianshou
+timm
+torchmetrics==0.10.3
