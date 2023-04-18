@@ -32,4 +32,7 @@ Project is released under the BSD-3 clause.
 ## Maintenance
 The maintainer of this software is Daphne Theodorakopoulos (daphne.theodorakopoulos@dfki.de).
 
+## Funding
+The DFKI Niedersachsen (DFKI NI) is funded in the ”zukunft.niedersachsen” by the Lower Saxony Ministry of Science and Culture and the Volkswagen Foundation (funding no. ZM3480). Marius Lindauer was supported by the German Federal Ministry of the Environment, Nature Conservation, Nuclear Safety and Consumer Protection (GreenAutoML4FAS project no. 67KI32007A).
+
 ## Cite
