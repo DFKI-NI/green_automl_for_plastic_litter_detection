@@ -57,12 +57,12 @@ elif model_name == 'resnet':
 elif model_name == 'vgg':
     net = vgg.vgg11(num_classes=8, dropout=params['dropout']).to(device)
 else:
-    "Model not defined"
+    exit(f"Model {model_name} is not supported")
 optimizer = optim.Adam(net.parameters(), lr=params['lr'], weight_decay=params['weight_decay'])
 
 
-def evaluate_model(model, loader, cuda=False):
-    criterion = nn.CrossEntropyLoss()
+def evaluate_model(model, loader):
+    criterion_ = nn.CrossEntropyLoss()
     model.to(device)
     model.eval()
     with torch.no_grad():
@@ -73,7 +73,7 @@ def evaluate_model(model, loader, cuda=False):
             logits = model(inputs)
             _, predict = torch.max(logits, 1)
             correct += (predict == targets).sum().cpu().item()
-            loss += criterion(logits, targets)
+            loss += criterion_(logits, targets)
             total += targets.size(0)
     print('Accuracy:', correct / total)
     acc = correct / total
@@ -100,7 +100,7 @@ current_trial = 'output_dir/' + nni.get_experiment_id() + '/' + 'trials/' + nni.
 torch.save(net.state_dict(), current_trial + '/net.pth')
 
 with EmissionsTracker(tracking_mode='process', log_level='critical', co2_signal_api_token='') as tracker:
-    val_acc, val_loss = evaluate_model(net, val_dataloader, cuda=True)
+    val_acc, val_loss = evaluate_model(net, val_dataloader)
 emissions_val = tracker.final_emissions
 
 x = torch.randn(1, 3, 128, 128).to(device)

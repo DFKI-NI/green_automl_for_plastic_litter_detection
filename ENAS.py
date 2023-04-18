@@ -2,32 +2,21 @@
 # coding: utf-8
 
 
-import os
-import pickle
 import pickle as pckl
 
-import nni
-import nni.retiarii.nn.pytorch as nn
 import numpy as np
-import pandas as pd
 import torch
-import torch.nn.functional as F
 from codecarbon import EmissionsTracker
-from fvcore.nn import FlopCountAnalysis, ActivationCountAnalysis, parameter_count
-from nni.compression.pytorch.utils import count_flops_params
+from fvcore.nn import FlopCountAnalysis
 from nni.retiarii import fixed_arch
-from nni.retiarii import model_wrapper
 from nni.retiarii.evaluator.pytorch import Classification
 from nni.retiarii.experiment.pytorch import RetiariiExperiment, RetiariiExeConfig
 from nni.retiarii.hub.pytorch import ENAS
-from nni.retiarii.hub.pytorch.nasnet import NDSStageDifferentiable
-from nni.retiarii.nn.pytorch import LayerChoice, InputChoice
 from nni.retiarii.strategy import ENAS as ENAS_startegy
-from pytorch_lightning.callbacks import Callback
-from torch.utils.data import DataLoader, SubsetRandomSampler
+from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
-from torchvision.io import read_image
-from train import evaluate_model
+
+from standard_architectures.train import evaluate_model
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -101,7 +90,7 @@ print('Finished Training')
 
 # add API token if available
 with EmissionsTracker(tracking_mode='process', log_level='critical', co2_signal_api_token='') as tracker:
-    test_acc, test_loss = evaluate_model(final_model, test_dataloader, cuda=True)
+    test_acc, test_loss = evaluate_model(final_model, test_dataloader)
 emissions_test = tracker.final_emissions
 
 x = torch.randn(1, 3, 128, 128).to(device)

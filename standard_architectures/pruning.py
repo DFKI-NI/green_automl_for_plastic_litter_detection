@@ -9,8 +9,6 @@ import torch
 import torch.nn.utils.prune as prune
 from codecarbon import EmissionsTracker
 from fvcore.nn import FlopCountAnalysis
-from sklearn.metrics import classification_report
-from torch import nn
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 from torchvision.models import alexnet, efficientnet, mobilenetv3, resnet, vgg
@@ -43,7 +41,7 @@ elif model_name == 'resnet':
 elif model_name == 'vgg':
     model = vgg.vgg11(num_classes=8, dropout=params['dropout']).to(device)
 else:
-    "Model not defined"
+    exit(f"Model {model_name} is not supported")
 
 model.load_state_dict(torch.load(path_to_best_trial + '/net.pth'))
 model.eval()
@@ -61,7 +59,7 @@ test_dataloader = DataLoader(test, batch_size=params['batch_size'], shuffle=True
 def get_metrics(model_in):
     res = dict()
     with EmissionsTracker(tracking_mode='process', log_level='critical', co2_signal_api_token='') as tracker:
-        res['test_acc'], res['test_loss'] = evaluate_model(model_in, test_dataloader, cuda=True)
+        res['test_acc'], res['test_loss'] = evaluate_model(model_in, test_dataloader)
     res['emissions_test'] = tracker.final_emissions
     x = torch.randn(1, 3, 128, 128).to(device)
     res['flops'] = FlopCountAnalysis(model_in, x).total()
