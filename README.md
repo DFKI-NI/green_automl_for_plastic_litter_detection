@@ -1,5 +1,5 @@
 # Green-AutoML for Plastic Litter Detection
-Code for the paper "Green-AutoML for Plastic Litter Detection" published at ICLR 2023 Workshop: Tackling Climate Change with Machine Learning.
+Code for the paper [Green-AutoML for Plastic Litter Detection](https://www.climatechange.ai/papers/iclr2023/53) published at ICLR 2023 Workshop: Tackling Climate Change with Machine Learning.
 
 ## Abstract
 The world’s oceans are polluted with plastic waste and the detection of it is an important step toward removing it. Wolf et al. (2020) created a plastic waste dataset
@@ -12,7 +12,7 @@ to develop a plastic detection system. Our work aims to improve the machine lear
  
             python standard_architectures/hpo_outer_loop.py --model alexnet --path_to_data *path_to_data*
 
-      The data is not publicaly available. You will need to provide your own dataset. You can repeat this with all five models of the paper: alexnet, efficient_net, mobile_net, resnet or vgg. This will automatically call "train.py" several times to tune the hyperparameters. You can find the results including the metrics on the validation data, the training emissions and the model in the ouput_dir.
+      The data is not publically available. You will need to provide your own dataset. You can repeat this with all five models of the paper: alexnet, efficient_net, mobile_net, resnet or vgg. This will automatically call "train.py" several times to tune the hyperparameters. You can find the results including the metrics on the validation data, the training emissions and the model in the ouput_dir.
 
 3. Perform pruning on the best run per model: 
 
@@ -24,7 +24,7 @@ to develop a plastic detection system. Our work aims to improve the machine lear
 
             python ENAS.py --path_to_data *path_to_data*
 
-      This will perform Neural Architecture Search and train the best archietcture from scratch. It provides the final metrics on the test set and the training emissions. 
+      This will perform Neural Architecture Search and train the best architecture from scratch. It provides the final metrics on the test set and the training emissions. 
 
 ## License
 Project is released under the BSD-3 clause.
@@ -36,3 +36,10 @@ The maintainer of this software is Daphne Theodorakopoulos (daphne.theodorakopou
 The DFKI Niedersachsen (DFKI NI) is funded in the ”zukunft.niedersachsen” by the Lower Saxony Ministry of Science and Culture and the Volkswagen Foundation (funding no. ZM3480). Marius Lindauer was supported by the German Federal Ministry of the Environment, Nature Conservation, Nuclear Safety and Consumer Protection (GreenAutoML4FAS project no. 67KI32007A).
 
 ## Cite
+    @inproceedings{theodorakopoulos2023green,
+    title={Green AutoML for Plastic Litter Detection},
+    author={Theodorakopoulos, Daphne and Manß, Christoph and Stahl, Frederic and Lindauer, Marius},
+    booktitle={ICLR 2023 Workshop on Tackling Climate Change with Machine Learning},
+    url={https://www.climatechange.ai/papers/iclr2023/53},
+    year={2023}
+    }
